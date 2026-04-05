@@ -240,6 +240,7 @@
       }
       input[type="number"] {
         -moz-appearance: textfield;
+        appearance: textfield;
       }
 
       .themed-header {
@@ -579,12 +580,61 @@
         .mark {
           display: none;
         }
+
+        .site-record-bar {
+          background: #000;
+          color: #fff;
+          position: relative !important;
+          left: auto !important;
+          right: auto !important;
+          bottom: auto !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          z-index: 60;
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
+          box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.25);
+          margin: 0;
+          transform: translateZ(0);
+          display: block;
+        }
+
+        .site-record-bar-inner {
+          width: 100%;
+          max-width: 100%;
+          text-align: center;
+          justify-content: center;
+          margin-left: 0;
+          margin-right: 0;
+          color: #fff;
+        }
+
+        .site-record-bar a {
+          color: #fff;
+          text-decoration: none;
+        }
+
+        .site-record-bar a:hover {
+          text-decoration: underline;
+        }
+
+        .site-record-warning {
+          color: #ef4444;
+        }
+
+        body {
+          padding-bottom: 0;
+        }
+
+        #app-container {
+          padding-bottom: 0;
+        }
       }
     </style>
   </head>
 
-  <body class="bg-gray-100 flex items-center justify-center min-h-screen theme-festive">
-    <div id="app-container" class="w-full max-w-7xl mx-auto p-4">
+  <body class="bg-gray-100 min-h-screen theme-festive flex flex-col">
+    <div id="app-container" class="w-full max-w-7xl mx-auto px-4 pt-10 pb-4 flex-1 flex flex-col">
       <!-- 设置界面 -->
       <div id="setup-screen" class="bg-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto hidden">
         <h1 class="text-3xl font-bold text-center themed-header mb-6">电子礼簿系统</h1>
@@ -658,7 +708,7 @@
       </div>
 
       <!-- 主界面 -->
-      <div id="main-screen" class="hidden">
+      <div id="main-screen" class="hidden flex-1 flex flex-col">
         <div class="flex justify-between items-center mb-4">
           <div class="flex items-center gap-4">
             <div class="relative">
@@ -670,7 +720,7 @@
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1">
           <!-- 左侧录入区 -->
           <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-lg">
             <h2 class="text-2xl font-bold mb-4 text-center border-b pb-2">礼金录入</h2>
@@ -748,6 +798,9 @@
       </div>
     </div>
     <div class="absolute lg:fixed top-5 right-5 flex gap-3 z-40">
+      <a href="https://www.937788.xyz/" target="_blank" rel="noopener noreferrer" class="bg-white/80 backdrop-blur rounded-full p-2 shadow-sm hover:shadow-md transition-all group" title="忆痕·发布页">
+        <i class="ri-home-4-line text-2xl text-gray-700 group-hover:scale-110 transition-transform block"></i>
+      </a>
       <button id="support-btn" class="bg-white/80 backdrop-blur rounded-full p-2 shadow-sm hover:shadow-md transition-all group" title="联系/支持作者">
         <i class="ri-heart-3-line text-2xl text-red-500 group-hover:scale-110 transition-transform block"></i>
       </button>
@@ -756,6 +809,16 @@
         <i id="fullscreen-icon" class="ri-fullscreen-line text-2xl themed-text themed-dropdown-text"></i>
       </button>
     </div>
+    <footer class="site-record-bar px-4 text-sm leading-6 mt-auto">
+      <div class="site-record-bar-inner flex flex-col items-center justify-center gap-1 text-center md:flex-row md:flex-wrap md:items-center md:justify-center md:gap-x-4 md:text-center">
+        <span class="site-record-warning font-bold">本站内容仅供学习和交流，非商业用途</span>
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">浙ICP备2025187466号</a>
+        <a href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33030402001483" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1">
+          <img src="https://www.937788.xyz/gonganbeian.png" alt="公安备案图标" class="h-4 w-4" />
+          <span>浙公网安备33030402001483号</span>
+        </a>
+      </div>
+    </footer>
     <!-- 模态框 -->
     <div id="modal-container" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
       <div id="modal" class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
@@ -1318,7 +1381,7 @@
         /**
          */
         applyTheme(theme) {
-          document.body.className = `bg-gray-100 flex items-center justify-center min-h-screen ${theme || "theme-festive"}`;
+          document.body.className = `bg-gray-100 min-h-screen flex flex-col ${theme || "theme-festive"}`;
         }
       }
 
@@ -3975,7 +4038,7 @@
 
             <div class="${cardClass}">
               <h4 class="font-bold text-lg text-gray-800 mb-1">打赏支持</h4>
-              <p class="text-md text-gray-500 mb-4">开源不易，请作者喝杯咖啡</p>
+              <p class="text-md text-gray-500 mb-4">请我喝杯咖啡</p>
 
               <div class="${imgBoxClass} hover:border-red-400">
                 <img src="${payQrSrc}" alt="收款码" class="${imgClass}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
